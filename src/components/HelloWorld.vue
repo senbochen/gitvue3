@@ -28,7 +28,7 @@ class Car {
 }
 let lanbo = new Car()
 console.log(lanbo.eat())
-// lanbo.greeting('2112')
+
 const HelloWorld = defineComponent({
   name: COMPONETNAME,
   components: { NButton },
