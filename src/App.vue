@@ -1,15 +1,22 @@
 <template>
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <n-message-provider>
+    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <login></login>
+  </n-message-provider>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { NMessageProvider } from 'naive-ui'
 import HelloWorld from './components/HelloWorld.vue'
+import Login from './pages/login/index.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    Login,
+    NMessageProvider
   }
 })
 </script>
