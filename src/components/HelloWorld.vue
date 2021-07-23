@@ -10,25 +10,6 @@ import { defineComponent, ref } from 'vue'
 import { NButton } from 'naive-ui'
 const COMPONETNAME = 'Test'
 
-function Greeter(greeting: string) {
-  return function (target: Function) {
-    target.prototype.run = function (): string {
-      return greeting
-    }
-  }
-}
-
-@Greeter('衬衫')
-class Car {
-  static san: string = '静态值'
-  constructor() {}
-  eat() {
-    return '这是一个成员方法'
-  }
-}
-let lanbo = new Car()
-console.log(lanbo.eat())
-
 const HelloWorld = defineComponent({
   name: COMPONETNAME,
   components: { NButton },
