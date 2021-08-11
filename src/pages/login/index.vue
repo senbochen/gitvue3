@@ -1,127 +1,72 @@
-<!--
- * @Author: your name
- * @Date: 2021-07-23 10:26:05
- * @LastEditTime: 2021-08-09 15:57:39
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /hello-vue3/src/pages/login/index.vue
--->
 
 <template>
-  <n-spin :show="show">
-    <div class="login">
-      <n-form
-        :model="model"
-        ref="formRef"
-        :rules="rules"
-        label-placement="left"
-        :label-width="60"
-      >
-        <n-form-item path="account" label="账号">
-          <n-input
-            v-model:value="model.account"
-            @keydown.enter.prevent
-            placeholder="请输入账号"
-          />
-        </n-form-item>
-        <n-form-item path="password" label="密码">
-          <n-input
-            v-model:value="model.password"
-            type="password"
-            placeholder="请输入密码"
-            @keydown.enter.prevent
-          />
-        </n-form-item>
-
-        <n-row :gutter="[0, 24]">
-          <n-col :span="24">
-            <n-button
-              style="width: 100%"
-              @click="handleValidateButtonClick"
-              :disabled="model.password === null"
-              type="primary"
-            >
-              登陆
-            </n-button>
-          </n-col>
-        </n-row>
-      </n-form>
-    </div>
-  </n-spin>
+  <div class="login-wrap">
+    <van-form @submit="onSubmit">
+      <van-cell-group inset>
+        <van-field
+          v-model="state.username"
+          name="用户名"
+          label="用户名"
+          placeholder="用户名"
+          :rules="[{ required: true, message: '请填写用户名' }]"
+        />
+        <van-field
+          v-model="state.password"
+          type="password"
+          name="密码"
+          label="密码"
+          placeholder="密码"
+          :rules="[{ required: true, message: '请填写密码' }]"
+        />
+      </van-cell-group>
+      <div style="margin: 16px">
+        <van-button round block type="primary" native-type="submit">
+          提交
+        </van-button>
+      </div>
+    </van-form>
+  </div>
 </template>
 
-<script lang='ts'>
-import { defineComponent, ref } from 'vue'
+<script lang="ts">
+import { defineComponent, reactive } from 'vue'
 import { useRouter } from 'vue-router'
-import { useMessage } from 'naive-ui'
-const COMPONETNAME = 'Login'
+import { Toast } from 'vant'
 const Login = defineComponent({
-  name: COMPONETNAME,
   setup() {
-    const formRef = ref<any>(null)
-    const rPasswordFormItemRef = ref(null)
-    const message = useMessage()
-    const router = useRouter()
-    const show = ref<boolean>(false)
-    const modelRef = ref<object>({
-      account: null,
-      password: null
+    const state = reactive({
+      username: '',
+      password: ''
     })
+    const router = useRouter()
+    const onSubmit = () => {
+      sessionStorage.setItem('user', 'senbochen')
+      Toast.loading({
+        message: '登陆中...',
+        forbidClick: true
+      })
+      setTimeout(() => {
+        router.replace('/')
+        Toast.clear()
+      }, 3000)
+    }
 
     return {
-      formRef,
-      router,
-      show,
-      rPasswordFormItemRef,
-      model: modelRef,
-      rules: {
-        account: [
-          {
-            required: true,
-            validator(rule: Object, value: string) {
-              if (!value) {
-                return new Error('账号不能为空~')
-              } else if (value !== 'admin') {
-                return new Error('账号有误!账号为admin')
-              }
-              return true
-            },
-            trigger: ['input', 'blur']
-          }
-        ],
-        password: [
-          {
-            required: true,
-            validator(rule: Object, value: string | number) {
-              if (!value) {
-                return new Error('密码不能为空~')
-              } else if (value !== '123456') {
-                return new Error('密码有误！密码为123456')
-              }
-              return true
-            }
-          }
-        ]
-      },
-      handleValidateButtonClick(e: any) {
-        e.preventDefault()
-        formRef.value.validate((errors: any) => {
-          if (!errors) {
-            show.value = true
-            sessionStorage.setItem('user', '15116263904')
-            setTimeout(() => {
-              router.replace('/')
-            }, 2000)
-          } else {
-            console.log(errors)
-            message.error('验证失败')
-          }
-        })
-      }
+      state,
+      onSubmit
     }
   }
 })
 export default Login
 </script>
 <style scoped>
+.login-wrap {
+  width: 100%;
+  height: 100%;
+  background-image: url('https://search-operate.cdn.bcebos.com/8779fea746c652bcdb9db237751f664a.png');
+  background-position: center center;
+}
+.van-form {
+  padding-top: 10%;
+}
 </style>

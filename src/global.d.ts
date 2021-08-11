@@ -1,5 +1,4 @@
-
-interface ObjectType {
+declare interface ObjectType {
   [key: string]: any
 }
 

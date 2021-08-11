@@ -1,11 +1,4 @@
-/*
- * @Author: your name
- * @Date: 2021-08-09 16:41:31
- * @LastEditTime: 2021-08-09 16:48:11
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /hello-vue3/src/service/index.ts
- */
+
 import axios from 'axios'
 const instance = axios.create({
   baseURL: '',

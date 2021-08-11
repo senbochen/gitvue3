@@ -1,5 +1,13 @@
+/*
+ * @Author: your name
+ * @Date: 2021-07-23 16:12:39
+ * @LastEditTime: 2021-08-11 14:06:59
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /hello-vue3/src/router/index.ts
+ */
 
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 const routes: RouteRecordRaw[] = [
   {
     path: '/login',
@@ -15,8 +23,10 @@ const routes: RouteRecordRaw[] = [
 
 
 const router = createRouter({
-  // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
-  history: createWebHashHistory(),
-  routes, // `routes: routes` 的缩写
+  history: createWebHistory(),
+  routes
 })
 export default router
+
+
+
