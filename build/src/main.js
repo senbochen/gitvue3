@@ -1,0 +1,18 @@
+import {createApp} from "vue";
+import naive from "naive-ui";
+import Vant from "vant";
+import "vant/lib/index.css";
+import "normalize.css";
+import "./styles/reset.css";
+import App from "./App.vue";
+import "amfe-flexible";
+import router from "./router/index.js";
+import "./service/index.js";
+import {createPinia} from "pinia";
+import "vfonts/Lato.css";
+const app = createApp(App);
+app.use(createPinia());
+app.use(naive);
+app.use(router);
+app.use(Vant);
+app.mount("#app");

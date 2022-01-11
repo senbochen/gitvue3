@@ -14,13 +14,14 @@ import 'vant/lib/index.css';
 import 'normalize.css'
 import './styles/reset.css'
 import App from './App.vue'
-import 'amfe-flexible';
-import './permission'
+import 'amfe-flexible'
 import router from './router/index'
 import './service'
+import { createPinia } from 'pinia'
 // 通用字体
 import 'vfonts/Lato.css'
 const app = createApp(App)
+app.use(createPinia())
 app.use(naive)
 app.use(router)
 app.use(Vant)
